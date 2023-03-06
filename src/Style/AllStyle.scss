@@ -1,0 +1,15 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+@import './Mixin';
+.ButtonSuccess{
+  @include Button();
+ 
+}
+.SpinnerWhite{
+    font-weight: bold;
+    color: white;
+    font-size: 20px;
+}

@@ -1,0 +1,13 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+@import '../../Style/Mixin';
+.Navbar{
+    width: 100%;
+    height: 60px;
+    @include DisplayFlex(10px,space-between);
+    padding: 0px 20px;
+    box-shadow: 0px 0px 10px  rgba(206, 206, 206, 0.63);
+    font-family: 'Shantell Sans', cursive;
+}

@@ -1,24 +1,31 @@
 import logo from './logo.svg';
 import './App.css';
-
+import { Login } from './Pages/LoginPage/Login';
+import { Routes, Route } from 'react-router-dom'
+import { GlobalPrivader } from './utils/Context';
+import { ProtectRoute } from './utils/ProtectRoute';
+import { LoadingSpinner } from './Component/Spinner/loading';
+import { Navbar } from './Component/Navbar/Navbar';
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+
+    <>
+      <GlobalPrivader>
+        <Routes>
+         
+            <Route axact path='/' element={<ProtectRoute> <Navbar/> </ProtectRoute>} />
+            <Route axact path='/login' element={<Login />} />
+
+         
+
+        </Routes>
+        <LoadingSpinner/>
+      </GlobalPrivader>
+
+
+
+    </>
+
   );
 }
 

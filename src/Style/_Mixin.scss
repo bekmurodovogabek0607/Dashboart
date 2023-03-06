@@ -1,0 +1,20 @@
+@mixin DisplayFlex ($Gp: 10px, $Jc: center, $At: center) {
+    display: flex;
+    align-items: $At;
+    justify-content: $Jc;
+
+    gap: $Gp;
+
+}
+
+@mixin Button($Witdh:100%,$Bgcolor:blue,$Color:white){
+  width:$Witdh ;
+  background-color: $Bgcolor;
+  color: $Color;
+  padding: 15px;
+  border-radius: 10px;
+  border: none;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+}

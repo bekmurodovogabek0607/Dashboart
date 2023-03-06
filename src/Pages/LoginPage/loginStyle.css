@@ -1,0 +1,50 @@
+* {
+  padding: 0px;
+  margin: 0px;
+}
+
+.Login {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+.Login > div {
+  width: 400px;
+  padding: 30px;
+  box-shadow: 2px 3px 30px rgba(206, 206, 206, 0.63);
+  border-radius: 20px;
+  font-family: "Shantell Sans", cursive;
+}
+.Login > div label {
+  font-size: 18px;
+  font-weight: 500;
+  color: blue;
+}
+.Login > div button {
+  margin-top: 30px;
+}
+.Login > div input {
+  color: blue;
+}
+.Login h1 {
+  padding: 10px 0px;
+  color: blue;
+  font-family: "Shantell Sans", cursive;
+}
+
+.inputmask {
+  width: 100%;
+  padding: 10px;
+  font-size: 18px;
+  font-family: "Shantell Sans", cursive;
+  border-radius: 5px;
+  border: 1.5px solid gray;
+  font-weight: 600;
+  margin: 5px 0px;
+}
+.inputmask:focus {
+  outline: none;
+}/*# sourceMappingURL=loginStyle.css.map */

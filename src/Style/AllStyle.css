@@ -1,0 +1,23 @@
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
+.ButtonSuccess {
+  width: 100%;
+  background-color: blue;
+  color: white;
+  padding: 15px;
+  border-radius: 10px;
+  border: none;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.SpinnerWhite {
+  font-weight: bold;
+  color: white;
+  font-size: 20px;
+}/*# sourceMappingURL=AllStyle.css.map */
