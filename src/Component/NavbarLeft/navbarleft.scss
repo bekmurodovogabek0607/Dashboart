@@ -1,0 +1,48 @@
+* {
+    padding: 0%;
+    margin: 0%;
+    box-sizing: border-box;
+}
+
+@import '../../Style/Mixin';
+
+.NavbarLeft {
+    width: 100%;
+   height: calc(100vh - 60px);
+    padding: 20px;
+    overflow-y: scroll;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+    ul{
+        width: 100%;
+        padding: 0px;
+        margin: 0px;
+       
+        li{
+
+            text-decoration: none;
+            list-style: none;
+            padding: 10px;
+            margin:5px 0px;
+            width: 100%;
+          
+            box-shadow: 2px 3px 10px  rgba(206, 206, 206, 0.63);
+            font-size: 18px;
+            font-weight: 600;
+            border-radius: 5px;
+            
+            &:hover{
+                background-color:rgb(226, 226, 226) ;
+                color: black;
+            }
+        }
+    }
+
+
+}
+.ActibeButton{
+    background-color: blue;
+    color: white;
+}

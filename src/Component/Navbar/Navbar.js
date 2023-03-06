@@ -13,6 +13,7 @@ import Menu from '@mui/material/Menu';
 
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
+import { NavbarLeft } from '../NavbarLeft/NavbarLeft';
 
 const settings = ['Profile', 'Account',  'Logout'];
 export const Navbar = () => {
@@ -30,7 +31,8 @@ export const Navbar = () => {
       setAnchorElUser(null);
     };
     return (
-        <div className='Navbar'>
+        <>
+         <div className='Navbar'>
             <h1>Logo</h1>
             <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
@@ -61,6 +63,10 @@ export const Navbar = () => {
               ))}
             </Menu>
           </Box>
+         
         </div>
+        
+        </>
+       
     )
 }

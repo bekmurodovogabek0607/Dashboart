@@ -20,4 +20,20 @@
   font-weight: bold;
   color: white;
   font-size: 20px;
+}
+
+.GlavniSketel {
+  width: 100%;
+  min-height: calc(100vh - 60px);
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+}
+.GlavniSketel > div:nth-child(1) {
+  width: 300px;
+}
+.GlavniSketel > div:nth-child(2) {
+  width: 100%;
+  height: 100%;
 }/*# sourceMappingURL=AllStyle.css.map */

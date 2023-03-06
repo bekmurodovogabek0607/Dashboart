@@ -13,3 +13,16 @@
     color: white;
     font-size: 20px;
 }
+.GlavniSketel{
+    width: 100%;
+    min-height: calc(100vh - 60px);
+    @include DisplayFlex(10px,space-between,flex-start);
+    &>div:nth-child(1){
+        width: 300px;
+       
+    }
+    &>div:nth-child(2){
+        width: 100%;
+        height: 100%;
+    }
+}
