@@ -11,6 +11,9 @@ import { Product } from './Pages/Product/Product';
 import { Categoriya } from './Pages/Categoriya/Categoriya';
 import { Message } from './Pages/Message/Message';
 import { Information } from './Pages/Information/Information';
+import { Setting } from './Pages/Setting/Setting';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 function App() {
   return (
 
@@ -23,12 +26,14 @@ function App() {
             <Route axact path='/catgory' element={<ProtectRoute> <Categoriya/> </ProtectRoute>} />
             <Route axact path='/message' element={<ProtectRoute> <Message/> </ProtectRoute>} />
             <Route axact path='/information' element={<ProtectRoute> <Information/> </ProtectRoute>} />
+            <Route axact path='/setting' element={<ProtectRoute> <Setting/> </ProtectRoute>} />
 
             <Route axact path='/login' element={<Login />} />
 
          
 
         </Routes>
+        <ToastContainer />
         <LoadingSpinner/>
       </GlobalPrivader>
 
