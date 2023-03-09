@@ -180,7 +180,7 @@ export const ProductUpdate=({openUpdate,setOpenUpdate})=>{
     console.log(UpdateItem);
     const handleCloseUpdate = () => setOpenUpdate(false);
     const { data, isSuccess, refetch } = useGet(['category'], '/category')
-    const UpdateProduct = useUpdate(`/products/${UpdateItem.id}`)
+    const UpdateProduct = useUpdate(`/products/${UpdateItem?.id}`)
     
     const [age, setAge] = React.useState('');
    
@@ -223,23 +223,23 @@ export const ProductUpdate=({openUpdate,setOpenUpdate})=>{
                         <TextField value={name_En} defaultValue={UpdateItem?.name_En} onChange={(e) => { setname_En(e.target.value) }} required id="outlined-basic" label="Name_Uz" variant="outlined" multiline />
                     </div>
                     <div className='CreatetUzRuEn'>
-                        <TextField value={type} defaultValue={UpdateItem.type} onChange={(e) => { setTupe(e.target.value) }} required id="outlined-basic" label="Type" variant="outlined" multiline />
-                        <TextField value={gender} defaultValue={UpdateItem.gender} onChange={(e) => { setgender(e.target.value) }} required id="outlined-basic" label="Gender" variant="outlined" multiline />
-                        <TextField value={color} defaultValue={UpdateItem.color} onChange={(e) => { setcolor(e.target.value) }} required id="outlined-basic" label="Color" variant="outlined" multiline />
+                        <TextField value={type} defaultValue={UpdateItem?.type} onChange={(e) => { setTupe(e.target.value) }} required id="outlined-basic" label="Type" variant="outlined" multiline />
+                        <TextField value={gender} defaultValue={UpdateItem?.gender} onChange={(e) => { setgender(e.target.value) }} required id="outlined-basic" label="Gender" variant="outlined" multiline />
+                        <TextField value={color} defaultValue={UpdateItem?.color} onChange={(e) => { setcolor(e.target.value) }} required id="outlined-basic" label="Color" variant="outlined" multiline />
                     </div>
                     <div className='CreatetUzRuEn'>
-                        <TextField value={price} defaultValue={UpdateItem.price}  onChange={(e) => { setprice(e.target.value) }} required id="outlined-basic" label="Price" variant="outlined" type={'number'} multiline />
-                        <TextField value={discount} defaultValue={UpdateItem.discount} onChange={(e) => { setdiscount(e.target.value) }} required id="outlined-basic" label="Discount" variant="outlined" type={'number'} multiline />
-                        <TextField value={size} defaultValue={UpdateItem.size} onChange={(e) => { setsize(e.target.value) }} required id="outlined-basic" label="Size" variant="outlined" multiline />
+                        <TextField value={price} defaultValue={UpdateItem?.price}  onChange={(e) => { setprice(e.target.value) }} required id="outlined-basic" label="Price" variant="outlined" type={'number'} multiline />
+                        <TextField value={discount} defaultValue={UpdateItem?.discount} onChange={(e) => { setdiscount(e.target.value) }} required id="outlined-basic" label="Discount" variant="outlined" type={'number'} multiline />
+                        <TextField value={size} defaultValue={UpdateItem?.size} onChange={(e) => { setsize(e.target.value) }} required id="outlined-basic" label="Size" variant="outlined" multiline />
                     </div>
                     <div className='CreatetUzRuEn'>
-                        <TextField value={description_Uz} defaultValue={UpdateItem.description_Uz} onChange={(e) => { setdescription_Uz(e.target.value) }} rows={4} required id="outlined-basic" label="Desc_Uz" variant="outlined" multiline />
-                        <TextField value={description_Ru} defaultValue={UpdateItem.description_Ru} onChange={(e) => { setdescription_Ru(e.target.value) }} rows={4} required id="outlined-basic" label="Desc_Ru" variant="outlined" multiline />
-                        <TextField value={description_En} defaultValue={UpdateItem.description_En} onChange={(e) => { setdescription_En(e.target.value) }} rows={4} required id="outlined-basic" label="Desc_Uz" variant="outlined" multiline />
+                        <TextField value={description_Uz} defaultValue={UpdateItem?.description_Uz} onChange={(e) => { setdescription_Uz(e.target.value) }} rows={4} required id="outlined-basic" label="Desc_Uz" variant="outlined" multiline />
+                        <TextField value={description_Ru} defaultValue={UpdateItem?.description_Ru} onChange={(e) => { setdescription_Ru(e.target.value) }} rows={4} required id="outlined-basic" label="Desc_Ru" variant="outlined" multiline />
+                        <TextField value={description_En} defaultValue={UpdateItem?.description_En} onChange={(e) => { setdescription_En(e.target.value) }} rows={4} required id="outlined-basic" label="Desc_Uz" variant="outlined" multiline />
                     </div>
                     <div className='CreatetUzRuEn'>
                         <div style={{ width: "33%" }}>
-                            <Checkbox  onChange={(e) => { setActive(e.target.checked) }} defaultChecked={UpdateItem.active} >Active</Checkbox>
+                            <Checkbox  onChange={(e) => { setActive(e.target.checked) }} defaultChecked={UpdateItem?.active} >Active</Checkbox>
 
                         </div>
 
