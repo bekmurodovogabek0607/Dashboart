@@ -11,6 +11,7 @@ export const Information = () => {
                     <NavbarLeft />
                 </div>
                 <div>
+                    {/* Faqat shu joyi o'zgaradi */}
                     <h1>Information</h1>
                 </div>
 

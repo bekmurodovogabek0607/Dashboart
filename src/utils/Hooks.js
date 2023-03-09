@@ -9,7 +9,7 @@ export const usePost=(url)=>{
     return useMutation((data)=>instance.post(url,data))
 }
 export const useDelete=(url)=>{
-    return useMutation(()=>instance.delete(url))
+    return useMutation((id)=>instance.delete(`${url}/${id}`))
 }
 export const useUpdate=(url)=>{
     return useMutation((data)=>instance.put(url,data))

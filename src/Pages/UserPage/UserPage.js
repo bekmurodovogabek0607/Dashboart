@@ -14,6 +14,7 @@ export const UserPage = () => {
                     <NavbarLeft />
                 </div>
                 <div>
+                      {/* Faqat shu joyi o'zgaradi */}
                     <h1>User</h1>
                 </div>
 

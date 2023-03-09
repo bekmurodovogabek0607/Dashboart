@@ -12,7 +12,7 @@ export const Categoriya = () => {
     const handleOpenCreate = () => setOpenCreate(true);
     const { data, isSuccess,refetch } = useGet(['category'], '/category')
    
-    const columns = ['Img', 'Name'];
+    const columns = ['Img', 'Name_Uz','Name_Ru','Name_En'];
     console.log(data);
     const rows = []
     if (isSuccess) {
@@ -22,7 +22,10 @@ export const Categoriya = () => {
             rows.push(
                 {
                     Id: i?.id,
-                    Name: i?.name_Uz,
+                    Name_Uz: i?.name_Uz,
+                    Name_Ru: i?.name_Ru,
+                    Name_En: i?.name_En,
+
                     photoId: i?.photoId,
                     ImgPath: i?.photo?.path
                 })

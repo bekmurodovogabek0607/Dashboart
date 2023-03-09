@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -16,14 +16,19 @@ import CloseIcon from '@mui/icons-material/Close';
 
 import { Https } from '../../Https';
 import { DeleteModal } from '../Modal/CategoriyaDelete';
+import { Context } from '../../utils/Context';
+import { UpdateCategori } from '../Modal/CategoriyaCreate';
 export const TableCategory = ({ columns, rows ,refetch}) => {
-    const [detetedId,setDeleted]=useState()
+    const {setDeleteId,setUpdateItem}=useContext(Context)
     const [openDelete, setOpenDelete] = React.useState(false);
-    const handleOpenDelete = (id) =>{setOpenDelete(true); setDeleted(id)} ;
-    console.log(detetedId);
+    const handleOpenDelete = (id) =>{setOpenDelete(true); setDeleteId(id)} ;
+    const [openUpdate, setOpenUpdate] = React.useState(false);
+    const handleOpenUpdate = (id) =>{setOpenUpdate(true); setUpdateItem(id)} ;
+    
     return (
         <>
-        <DeleteModal openDelete={openDelete} setOpenDelete={setOpenDelete} detetedId={detetedId} refetch/>
+        <UpdateCategori openUpdate={openUpdate} setOpenUpdate={setOpenUpdate}/>
+        <DeleteModal openDelete={openDelete} setOpenDelete={setOpenDelete} />
          <TableContainer  component={Paper}>
             <Table className='PozitionTableHead' sx={{ minWidth: 650  }}  aria-label="customized table">
                 <TableHead >
@@ -35,7 +40,7 @@ export const TableCategory = ({ columns, rows ,refetch}) => {
                                 )
                             })
                         }
-                        <TableCell ></TableCell>
+                        <TableCell></TableCell>
 
                     </TableRow>
                 </TableHead>
@@ -47,17 +52,20 @@ export const TableCategory = ({ columns, rows ,refetch}) => {
 
                             <TableCell align="left">
                                 <Avatar
-                                    sx={{ bgcolor: deepOrange[500] }}
+                                    // sx={{ bgcolor: deepOrange[500] }}
                                     alt={row.Name}
                                     variant="rounded"
-                                    src={`${Https}/upload/${row.ImgPath}`}
+                                    src={`${Https}upload/${row.ImgPath}`}
                                 />
                             </TableCell>
-                            <TableCell align="left">{row.Name}</TableCell>
+                            <TableCell align="left">{row.Name_Uz}</TableCell>
+                            <TableCell align="left">{row.Name_Ru}</TableCell>
+                            <TableCell align="left">{row.Name_En}</TableCell>
+
                             
                             <TableCell align="left">
                                 <div className='DeleteUpdateDiv'>
-                                    <button className='ButtonUpdate' ><i class='bx bx-pencil' ></i></button>
+                                    <button onClick={()=>{handleOpenUpdate(row)}} className='ButtonUpdate' ><i class='bx bx-pencil' ></i></button>
                                     <button onClick={()=>{handleOpenDelete(row.Id)}} className='ButtonDelete'><i class='bx bx-trash'></i></button>
                                 </div>
 

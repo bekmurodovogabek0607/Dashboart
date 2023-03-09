@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import { useDelete, useGet } from '../../utils/Hooks';
 import { toast } from 'react-toastify';
+import { Context } from '../../utils/Context';
 const style = {
     position: 'absolute',
     top: '50%',
@@ -17,13 +18,13 @@ const style = {
     p: 4,
     borderRadius: 2
 };
-export const DeleteModal = ({ openDelete, setOpenDelete, detetedId }) => {
-    console.log(detetedId);
+export const DeleteModal = ({ openDelete, setOpenDelete }) => {
+    const {DeleteId}=useContext(Context)
     const handleCloseDelete = () => setOpenDelete(false);
-    const mutation = useDelete(`/category/${detetedId}`)
+    const mutation = useDelete(`/category`)
     const {refetch } = useGet(['category'], '/category')
     function Delete() {
-      mutation.mutate(detetedId,{
+      mutation.mutate(DeleteId,{
         onSuccess:(data)=>{
             console.log(data);
             refetch()

@@ -11,6 +11,7 @@ export const Message = () => {
             <NavbarLeft />
         </div>
         <div>
+            {/* Faqat shu joyi o'zgaradi */}
             <h1>Message</h1>
         </div>
 
