@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Box from '@mui/material/Box';
 // import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
@@ -7,11 +7,13 @@ import Modal from '@mui/material/Modal';
 import { UploadOutlined } from '@ant-design/icons';
 import { Button, Upload } from 'antd';
 import { Https } from '../../Https';
-import { usePost, useUpdate } from '../../utils/Hooks'
+import { useGet, usePost, useUpdate } from '../../utils/Hooks'
 import { toast } from 'react-toastify';
 
 import { useContext } from 'react';
 import { Context } from '../../utils/Context';
+import { useFormik } from 'formik';
+import * as yup from 'yup';
 const style = {
     position: 'absolute',
     top: '50%',
@@ -24,43 +26,61 @@ const style = {
     p: 4,
     borderRadius: 2
 };
+const validationSchema = yup.object({
 
+    name_Uz: yup
+        .string('Enter your name_Uz')
+        .required('name_Uz is required')
+    ,
+
+    name_Ru: yup
+        .string('Enter your name_Ru')
+        .required('name_Ru is required'),
+
+    name_En: yup
+        .string('Enter your name_En')
+        .required('name_En is required')
+    ,
+
+});
 export const CategoryCreate = ({ openCreate, setOpenCreate }) => {
     const [ButtonDisablet, setButtonDisablet] = useState(false)
     const handleCloseCreate = () => setOpenCreate(false);
     const [ImgInformation, setImgInformation] = useState()
-    const [name_Uz, setName_Uz] = useState()
-    const [name_Ru, setName_Ru] = useState()
-    const [name_En, setName_En] = useState()
+
 
     const Mutate = usePost('/category')
-    function CreateCateg(e) {
-        e.preventDefault()
-        setButtonDisablet(true)
-        Mutate.mutate(
-            {
-                name_Uz: name_Uz,
-                name_Ru: name_Ru,
-                name_En: name_En,
-                photoId: ImgInformation.id
-            }, {
-            onSuccess: (data => {
-                toast.success('Add Category')
-                setButtonDisablet(false)
-                setName_Uz('')
-                setName_Ru('')
-                setName_En('')
+    const { data, isSuccess,refetch } = useGet(['category'], '/category')
+    const formik = useFormik({
+        initialValues: {
+            name_Uz: "",
+            name_Ru: "",
+            name_En: "",
 
-            }),
-            onError: (data => {
-                toast.error("Error")
-                setButtonDisablet(false)
-            })
-        }
-        )
+        },
+        validationSchema: validationSchema,
+        onSubmit: (values) => {
+            setButtonDisablet(true)
+            Mutate.mutate(
+                {
+                    ...values,
+                    photoId: ImgInformation.id
+                }, {
+                onSuccess: (data => {
+                    toast.success('Add Category')
+                    setButtonDisablet(false)
+                    refetch()
+                }),
+                onError: (data => {
+                    toast.error("Error")
+                    setButtonDisablet(false)
+                })
+            }
+            )
+            console.log(values);
+        },
 
-
-    }
+    });
     return (<>
 
         <Modal
@@ -68,14 +88,42 @@ export const CategoryCreate = ({ openCreate, setOpenCreate }) => {
             onClose={handleCloseCreate}
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description"
-        ><form onSubmit={(e) => { CreateCateg(e) }}>
+        >
 
-                <Box sx={style}>
+            <Box sx={style}>
+                <form onSubmit={formik.handleSubmit}>
                     <h1>Create Category</h1>
                     <div className='CreatetUzRuEn'>
-                        <TextField value={name_Uz} onChange={(e) => { setName_Uz(e.target.value) }} required id="outlined-basic" label="Name_Uz" variant="outlined" />
-                        <TextField value={name_Ru} onChange={(e) => setName_Ru(e.target.value)} required id="outlined-basic" label="Name_Ru" variant="outlined" />
-                        <TextField value={name_En} onChange={(e) => setName_En(e.target.value)} required id="outlined-basic" label="Name_Uz" variant="outlined" />
+                        <TextField
+                            id="name_Uz"
+                            label="name_Uz"
+                            variant="outlined"
+                            name='name_Uz'
+                            value={formik.values.name_Uz}
+                            defaultValue={formik.values.name_Uz}
+                            onChange={formik.handleChange}
+                            error={formik.touched.name_Uz && Boolean(formik.errors.name_Uz)}
+                            helperText={formik.touched.name_Uz && formik.errors.name_Uz} />
+                        <TextField
+                            id="name_Ru"
+                            label="name_Ru"
+                            variant="outlined"
+                            name='name_Ru'
+                            value={formik.values.name_Ru}
+                            defaultValue={formik.values.name_Ru}
+                            onChange={formik.handleChange}
+                            error={formik.touched.name_Ru && Boolean(formik.errors.name_Ru)}
+                            helperText={formik.touched.name_Ru && formik.errors.name_Ru} />
+                        <TextField
+                            id="name_En"
+                            label="name_En"
+                            variant="outlined"
+                            name='name_En'
+                            value={formik.values.name_En}
+                            defaultValue={formik.values.name_En}
+                            onChange={formik.handleChange}
+                            error={formik.touched.name_En && Boolean(formik.errors.name_En)}
+                            helperText={formik.touched.name_En && formik.errors.name_En} />
                     </div>
                     <Upload
 
@@ -89,9 +137,11 @@ export const CategoryCreate = ({ openCreate, setOpenCreate }) => {
                         <Button icon={<UploadOutlined />}>Upload</Button>
                     </Upload>
                     <button disabled={ButtonDisablet} className='ButtonSuccess' style={{ marginTop: '20px' }}>Create</button>
-                </Box>
 
-            </form>
+                </form>
+            </Box>
+
+
 
         </Modal>
     </>
@@ -109,6 +159,8 @@ export const UpdateCategori = ({ openUpdate, setOpenUpdate }) => {
     const [name_Ru, setName_Ru] = useState()
     const [name_En, setName_En] = useState()
     const put = useUpdate(`/category/${UpdateItem?.Id}`)
+    const { data, isSuccess,refetch } = useGet(['category'], '/category')
+    
     console.log(ImgInformation);
     function UpdateItemFunction() {
         put.mutate(
@@ -120,6 +172,7 @@ export const UpdateCategori = ({ openUpdate, setOpenUpdate }) => {
             }, {
             onSuccess: () => {
                 toast.success('Updated')
+                refetch()
             },
             onError: () => {
                 toast.error('Error')
@@ -128,7 +181,40 @@ export const UpdateCategori = ({ openUpdate, setOpenUpdate }) => {
         )
 
     }
+  
+    
+   
+    const formik = useFormik({
+        initialValues:{
+            name_Uz: UpdateItem?.Name_Uz,
+            name_Ru: UpdateItem?.Name_Ru,
+            name_En: UpdateItem?.Name_En,
+    
+        } ,
+        validationSchema: validationSchema,
+        
+        onSubmit: (values) => {
+            
+            put.mutate(
+                {
+                    ...values,
+                    photoId: ImgInformation.id
+                }, {
+                onSuccess: (data => {
+                    toast.success('Add Category')
 
+
+                }),
+                onError: (data => {
+                    toast.error("Error")
+
+                })
+            }
+            )
+            console.log(values);
+        },
+
+    });
 
     return (
         <>
@@ -139,25 +225,56 @@ export const UpdateCategori = ({ openUpdate, setOpenUpdate }) => {
                 aria-describedby="modal-modal-description"
             >
                 <Box sx={style}>
-                    <h1>Create Category</h1>
-                    <div className='CreatetUzRuEn'>
-                        <TextField value={name_Uz} defaultValue={UpdateItem?.Name_Uz}  onChange={(e) => { setName_Uz(e.target.value) }} required id="outlined-basicUZ" label="Name_Uz" variant="outlined" />
-                        <TextField value={name_Ru} defaultValue={UpdateItem?.Name_Ru} onChange={(e) => setName_Ru(e.target.value)} required id="outlined-basicRu" label="Name_Ru" variant="outlined" />
-                        <TextField value={name_En} defaultValue={UpdateItem?.Name_En} onChange={(e) => setName_En(e.target.value)} required id="outlined-basicEn" label="Name_Uz" variant="outlined" />
-                    </div>
-                    <img style={{ height: '100px' }} src={`${Https}upload/${UpdateItem?.ImgPath}`} alt='Rasm topilmadi' />
-                    <Upload
+                    <form onSubmit={formik.handleSubmit}>
+                        <h1>Create Category</h1>
+                        <div className='CreatetUzRuEn'>
+                            <TextField
+                                id="name_Uz"
+                                label="name_Uz"
+                                variant="outlined"
+                                name='name_Uz'
+                                value={formik.values.name_Uz}
+                                defaultValue={formik.values.name_Uz}
+                                onChange={formik.handleChange}
+                                error={formik.touched.name_Uz && Boolean(formik.errors.name_Uz)}
+                                helperText={formik.touched.name_Uz && formik.errors.name_Uz} />
+                            <TextField
+                                id="name_Ru"
+                                label="name_Ru"
+                                variant="outlined"
+                                name='name_Ru'
+                                value={formik.values.name_Ru}
+                                defaultValue={formik.values.name_Ru}
+                                onChange={formik.handleChange}
+                                error={formik.touched.name_Ru && Boolean(formik.errors.name_Ru)}
+                                helperText={formik.touched.name_Ru && formik.errors.name_Ru} />
+                            <TextField
+                                id="name_En"
+                                label="name_En"
+                                variant="outlined"
+                                name='name_En'
+                                value={formik.values.name_En}
+                                defaultValue={formik.values.name_En}
+                                onChange={formik.handleChange}
+                                error={formik.touched.name_En && Boolean(formik.errors.name_En)}
+                                helperText={formik.touched.name_En && formik.errors.name_En} />
+                        </div>
+                        <Upload
 
-                        name='photo'
-                        action={`${Https}upload/upload`}
-                        listType="picture"
-                        maxCount={1}
-                        onChange={(data) => setImgInformation(data)}
-                        onRemove
-                    >
-                        <Button icon={<UploadOutlined />}>Change img</Button>
-                    </Upload>
-                    <button onClick={() => { UpdateItemFunction() }} className='ButtonSuccess' style={{ marginTop: '20px' }}>Update</button>
+                            name='photo'
+                            action={`${Https}upload/upload`}
+                            listType="picture"
+                            maxCount={1}
+                            onChange={(data) => setImgInformation(data.file.response)}
+                            onRemove
+                        >
+                            <img style={{ height: '100px' }} src={`${Https}upload/${UpdateItem?.ImgPath}`} alt='Rasm topilmadi' />
+
+                            <Button icon={<UploadOutlined />}>Upload</Button>
+                        </Upload>
+                        <button  className='ButtonSuccess' style={{ marginTop: '20px' }}>Create</button>
+
+                    </form>
                 </Box>
             </Modal>
 

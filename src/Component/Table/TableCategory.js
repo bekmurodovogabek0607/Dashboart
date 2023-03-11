@@ -36,7 +36,7 @@ export const TableCategory = ({ columns, rows ,refetch}) => {
                         {
                             columns?.map((item, index) => {
                                 return (
-                                    <TableCell key={index} >{item}</TableCell>
+                                    <TableCell sx={{fontWeight:"bold"}} key={index} >{item}</TableCell>
                                 )
                             })
                         }

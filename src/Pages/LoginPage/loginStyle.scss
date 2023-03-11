@@ -52,3 +52,22 @@
         outline: none;
     }
 }
+.PhoneNumberLIst{
+    padding: 7px;
+  @include DisplayFlex();
+    border: 1px solid gray;
+    border-radius: 50px;
+    margin: 0px 5px 5px 0px;
+   
+    &>button{
+        width: 20px;
+        height: 20px;
+        @include DisplayFlex();
+        border: none;
+        background-color: red;
+        color: white;
+        font-weight: bold;
+        border-radius: 50%;
+        cursor: pointer;
+    }
+}

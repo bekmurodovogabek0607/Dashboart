@@ -38,7 +38,7 @@ export const Tablee = ({ columns, rows }) => {
                         {
                             columns?.map((item, index) => {
                                 return (
-                                    <TableCell key={index} >{item}</TableCell>
+                                    <TableCell sx={{fontWeight:"bold"}} key={index} >{item}</TableCell>
                                 )
                             })
                         }
@@ -60,7 +60,7 @@ export const Tablee = ({ columns, rows }) => {
                                     src={`${Https}upload/${row.photoId}`}
                                 />
                             </TableCell>
-                            <TableCell align="left">{row.name_Uz}</TableCell>
+                            <TableCell align="left">{row.name_Uz}{`${Https}upload/${row.photoId}`}</TableCell>
                             <TableCell align="left">{row.price}</TableCell>
                             <TableCell align="left">{row.discount}</TableCell>
                             <TableCell align="left">{row.active?<CheckIcon/>:<CloseIcon/>}</TableCell>

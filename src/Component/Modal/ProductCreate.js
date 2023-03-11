@@ -50,7 +50,8 @@ export const ProductCreate = ({ openCreate, setOpenCreate }) => {
     const [photoId, setImgInformation] = useState()
 
     const handleCloseCreate = () => setOpenCreate(false);
-    const { data, isSuccess, refetch } = useGet(['category'], '/category')
+    const { data } = useGet(['category'], '/category')
+    const {refetch}=useGet(['products'],'/products')
     const PostProduct = usePost('/products')
     
     const [age, setAge] = React.useState('');
@@ -69,6 +70,7 @@ export const ProductCreate = ({ openCreate, setOpenCreate }) => {
             onSuccess: (data) => {
                 console.log(data);
                 toast.success('Created')
+                refetch()
             },
             onError: (err) => {
                 console.log(err);
@@ -179,7 +181,8 @@ export const ProductUpdate=({openUpdate,setOpenUpdate})=>{
     const [photoId, setImgInformation] = useState()
     console.log(UpdateItem);
     const handleCloseUpdate = () => setOpenUpdate(false);
-    const { data, isSuccess, refetch } = useGet(['category'], '/category')
+    const { data } = useGet(['category'], '/category')
+    const {refetch}=useGet(['products'],'/products')
     const UpdateProduct = useUpdate(`/products/${UpdateItem?.id}`)
     
     const [age, setAge] = React.useState('');
@@ -197,7 +200,8 @@ export const ProductUpdate=({openUpdate,setOpenUpdate})=>{
         },{
             onSuccess: (data) => {
                 console.log(data);
-                toast.success('Created')
+                toast.success('Updated')
+                refetch()
             },
             onError: (err) => {
                 console.log(err);
@@ -228,8 +232,8 @@ export const ProductUpdate=({openUpdate,setOpenUpdate})=>{
                         <TextField value={color} defaultValue={UpdateItem?.color} onChange={(e) => { setcolor(e.target.value) }} required id="outlined-basic" label="Color" variant="outlined" multiline />
                     </div>
                     <div className='CreatetUzRuEn'>
-                        <TextField value={price} defaultValue={UpdateItem?.price}  onChange={(e) => { setprice(e.target.value) }} required id="outlined-basic" label="Price" variant="outlined" type={'number'} multiline />
-                        <TextField value={discount} defaultValue={UpdateItem?.discount} onChange={(e) => { setdiscount(e.target.value) }} required id="outlined-basic" label="Discount" variant="outlined" type={'number'} multiline />
+                        <TextField value={price} defaultValue={UpdateItem?.price}  onChange={(e) => { setprice(Number(e.target.value)) }} required id="outlined-basic" label="Price" variant="outlined" type={'number'} multiline />
+                        <TextField value={discount} defaultValue={UpdateItem?.discount} onChange={(e) => { setdiscount(Number(e.target.value)) }} required id="outlined-basic" label="Discount" variant="outlined" type={'number'} multiline />
                         <TextField value={size} defaultValue={UpdateItem?.size} onChange={(e) => { setsize(e.target.value) }} required id="outlined-basic" label="Size" variant="outlined" multiline />
                     </div>
                     <div className='CreatetUzRuEn'>

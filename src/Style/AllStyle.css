@@ -125,4 +125,15 @@
 }
 .CreatetUzRuEn > input {
   font-weight: 600;
+}
+
+.Informations {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+}
+.Informations > div {
+  width: 50%;
 }/*# sourceMappingURL=AllStyle.css.map */

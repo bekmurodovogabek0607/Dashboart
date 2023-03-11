@@ -47,4 +47,29 @@
 }
 .inputmask:focus {
   outline: none;
+}
+
+.PhoneNumberLIst {
+  padding: 7px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border: 1px solid gray;
+  border-radius: 50px;
+  margin: 0px 5px 5px 0px;
+}
+.PhoneNumberLIst > button {
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border: none;
+  background-color: red;
+  color: white;
+  font-weight: bold;
+  border-radius: 50%;
+  cursor: pointer;
 }/*# sourceMappingURL=loginStyle.css.map */

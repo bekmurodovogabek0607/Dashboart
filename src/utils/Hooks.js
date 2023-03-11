@@ -12,5 +12,5 @@ export const useDelete=(url)=>{
     return useMutation((id)=>instance.delete(`${url}/${id}`))
 }
 export const useUpdate=(url)=>{
-    return useMutation((data)=>instance.put(url,data))
+    return useMutation((data)=>instance.patch(url,data))
 }

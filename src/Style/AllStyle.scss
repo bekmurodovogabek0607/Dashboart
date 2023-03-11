@@ -68,3 +68,12 @@
         font-weight: 600;
     }
 }
+.Informations{
+    width: 100%;
+    @include DisplayFlex(10px,space-between,flex-start);
+    &>div{
+        width: 50%;
+        
+       
+    }
+}
